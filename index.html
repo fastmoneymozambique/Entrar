@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Tema Amarelo e Preto</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #f0c808;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form id="formLogin">
+            <input type="tel" id="telefone" placeholder="Número de Telefone" required><br>
+            <input type="password" id="senha" placeholder="Senha" required><br>
+            <button type="submit">Entrar</button>
+        </form>
+        <p>Não tem uma conta? <a href="registro.html">Crie uma aqui</a></p>
+    </div>
+
+    <script>
+        // Função para verificar as credenciais de login (exemplo básico)
+        function verificarLogin(telefone, senha) {
+            // Implementação básica para demonstração
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            return usuarios.find(user => user.telefone === telefone && user.senha === senha);
+        }
+
+        // Capturar envio do formulário de login
+        const formLogin = document.getElementById('formLogin');
+        formLogin.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const telefone = document.getElementById('telefone').value;
+            const senha = document.getElementById('senha').value;
+
+            // Verificar as credenciais de login
+            const usuario = verificarLogin(telefone, senha);
+            if (usuario) {
+                alert(`Login bem-sucedido para o número ${telefone}`);
+                
+                // Redirecionar para a página desejada após o login
+                window.location.href = 'https://fastmoneymozambique.github.io/fastmoneymz/';
+                
+                // Limpar formulário após login (opcional)
+                formLogin.reset();
+            } else {
+                alert('Credenciais inválidas. Verifique seu número de telefone e senha.');
+            }
+        });
+    </script>
+</body>
+</html>
